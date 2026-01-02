@@ -30,3 +30,7 @@ This project focuses on **frontend development only**, including user interface 
 
 ## Project Type
 Academic Project – Project-Based Learning (PBL)
+
+![BIMA-X Preview](assets/Screenshot%20(505).png)
+![BIMA-X Preview](assets/Screenshot%20(506).png)
+
