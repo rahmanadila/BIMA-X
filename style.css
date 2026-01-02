@@ -1,56 +1,148 @@
-header{
-    background: linear-gradient(135deg, #1E3A8A, #0F2454);
-    text-align: center;
-    padding: 20px;
-    /*border-style: solid;
-    border-color: #D4E0F0;*/
-    color: white;
-    font-family: Poppins;
-    font-weight: 700;
-}
-
-.deskripsi{
-    font-family: Poppins;
-    font-weight: 400;
-    font-size: 18px;
-    font-style: italic;
-}
-
-body{
-    background-color: #E8F1FA;
+body {
     margin: 0;
-    font-family: Poppins;
-    font-size: 16px;
-    color: #1F2937;
+    font-family: 'Inter', sans-serif;
+    color: #FFEAD1;
+    background-color: #2b0000;
+
+    background-image:
+        linear-gradient(rgba(255, 80, 0, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 80, 0, 0.08) 1px, transparent 1px);
+    background-size: 45px 45px;
+
+    opacity: 0;
+    animation: boot-in 1.2s ease-out forwards;
 }
 
-h2{
-  text-align: center;
+@keyframes boot-in {
+    0% { opacity: 0; filter: blur(4px); }
+    100% { opacity: 1; filter: blur(0); }
 }
+
+body::before {
+    content: "";
+    position: fixed;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+        rgba(255, 200, 100, 0.05),
+        rgba(255, 200, 100, 0)
+    );
+    animation: scanMove 6s linear infinite;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+@keyframes scanMove {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+header {
+    background: linear-gradient(#7a0000, #3c0000);
+    text-align: center;
+    padding: 28px;
+    color: #FFEAD1;
+    border-bottom: 2px solid #FFB347;
+    box-shadow: 0 0 25px rgba(255, 120, 40, 0.4);
+}
+
+.header {
+    font-size: 32px;
+    font-weight: 700;
+    text-shadow:
+        0 0 6px rgba(255, 200, 150, 0.9),
+        0 0 12px rgba(255, 120, 40, 0.9),
+        0 0 22px rgba(255, 70, 0, 0.8);
+    animation: glowPulse 3s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+    0% { text-shadow: 0 0 6px #ffcf9a; }
+    50% { text-shadow: 0 0 22px #ff7b00; }
+    100% { text-shadow: 0 0 6px #ffcf9a; }
+}
+
+.deskripsi {
+    font-size: 17px;
+    opacity: 0.9;
+}
+
+/*.serial-buttons {
+    width: 100%;
+    margin: 25px auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-connect, .btn-freeze {
+    padding: 14px 28px;
+    border-radius: 12px;
+    border: 2px solid #ffbd6b;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-size: 18px;
+    box-shadow: 0 0 10px rgba(255,170,90,0.55);
+}
+
+.btn-connect {
+    background: #B40000;
+    color: white;
+}
+.btn-connect:hover {
+    background: #D00000;
+    transform: scale(1.06);
+}
+
+.btn-freeze {
+    background: #FFE3BA;
+    color: #5a2d00;
+}
+.btn-freeze:hover:not(:disabled) {
+    background: #fff2d8;
+    transform: scale(1.06);
+}
+.btn-freeze:disabled {
+    opacity: 0.45;
+}*/
 
 .form-container{
     padding: 20px;
     margin: 20px auto;
-    border-radius: 5px;
-    width: auto;
+    width: 95%;
     display: flex;
     gap: 20px;
 }
 
 .form-box1{
-    background: white;
-    border: #D1E3F3 2px solid;
-    border-radius: 12px;
-    padding: 20px;
-    width: 30%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: rgba(255,220,180,0.04);
+    backdrop-filter: blur(3px);
+    border: 2px solid #FFB347;
+    border-radius: 14px;
+    padding: 25px;
+    width: 25%;
+    margin: 30px auto;
+    box-shadow:
+        0 0 20px rgba(255, 180, 100, 0.35),
+        inset 0 0 12px rgba(255, 150, 60, 0.2);
+}
+
+.data{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #FFD089;
 }
 
 label{
     display: block;
     margin-bottom: 0.5rem 0;
     font-weight: 600;
-    color: #1F2937;
+    color: #FFD089;
 }
 
 input, select{
@@ -60,125 +152,182 @@ input, select{
     transition: 0.2s ease;
 }
 
-input{
-  background:
-  border; 1.5px solid #E0E6ED;
-  color: #FFFFFF;
+input, select{
+  background:whitesmoke;
+  border: 1.5px solid #ffbd6b;
+  color: black;
   border-radius: 8px;
   padding: 10px;
 }
 
-input[type="submit"] {
-  display: block;
-  width: 60%;
-  margin: 1em auto;
-  height: 2em;
-  font-size: 1.1rem;
-  background: linear-gradient(135deg, #1E3A8A, #0F2454);
-  border: none;
-  min-width: 300px;
+.button {
+  font-size: 18px;
+  background: #B40000;
+  border: 2px solid #ffbd6b;
   color: white;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 12px;
   cursor: pointer;
+  transition: 0.3s ease;
   padding: 12px 20px;
+  box-shadow: 0 0 10px rgba(255,170,90,0.55);
 }
 
-input[type="submit"]:hover {
-  filter: brightness(1.1);
+.button:hover {
+    background: #D00000;
+    transform: scale(1.06);
 }
 
-.form-box2{
-    background: white;
-    border: #D1E3F3 2px solid;
-    border-radius: 12px;
-    padding: 20px 25px;
-    width: 70%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.grid-sensor{
-    display: flex;
-    gap: 20px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    justify-content: center;
-    width: 100%;
+.form-box2 {
+    background: rgba(255,220,180,0.04);
+    backdrop-filter: blur(3px);
+
+    border: 2px solid #FFB347;
+    border-radius: 14px;
+    padding: 25px 30px;
+
+    width: 75%;
+    margin: 30px auto;
+
+    box-shadow:
+        0 0 20px rgba(255, 180, 100, 0.35),
+        inset 0 0 12px rgba(255, 150, 60, 0.2);
 }
 
-.measurements{
-    flex: 1;
-    background-color: #E6F2FF;
-    border: #D1E3F3 2px solid;
-    border-radius: 12px;
-    padding: 15px 20px;
-    height: 100px;
-    padding-bottom: 150px;
+.data-pengukuran {
     text-align: center;
-    font-size: 20px;
-}
-
-.measure-value {
-    font-size: 32px;
-    font-weight: 700;
-    color: #6B7280;
-    text-align: center;
-    padding-top: 80px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #FFD089;
 }
 
 .note-sensor {
     text-align: center;
-    color: #6B7280;
-    margin-top: 20px;
-    font-size: 17px;
-    font-style: italic;
-    opacity: 0.8;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 95px;
+    color: #FFDDC0;
 }
 
 .hasil-bmi{
-    width: 95%;
-    margin: 20px auto;
-    background: #ffffff;
-    border: #D1E3F3 2px solid;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #FFD089;
 }
 
-.container{
+.grid-sensor {
+    display: flex;
+    gap: 25px;
+    margin: 45px 0;
+    justify-content: center;
+    width: 100%;
+}
+
+.measurements {
+    flex: 1;
+    min-height: 160px;
+    background: rgba(255, 180, 120, 0.04);
+    border: 2px solid #FFAF66;
+    border-radius: 14px;
     padding: 20px;
+    text-align: center;
+    box-shadow:
+        0 0 13px rgba(255,160,80,0.25),
+        inset 0 0 12px rgba(255,160,80,0.15);
+}
+
+.measure-value,
+#beratValue,
+#tinggiValue,
+#bmiValue {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 42px;
+    color: #FFD089;
+    text-shadow: 0 0 10px rgba(255,200,120,0.85);
+    margin-top: 30px;
+}
+
+.hasil-bmi {
+    width: 92%;
     margin: 20px auto;
-    border-radius: 5px;
+    padding: 25px;
+
+    background: rgba(255,220,170,0.05);
+    border: 2px solid #FFB347;
+    border-radius: 14px;
+
+    box-shadow:
+        0 0 20px rgba(255, 180, 100, 0.35),
+        inset 0 0 12px rgba(255, 150, 60, 0.2);
+}
+
+.penjelasan {
+    font-size: 18px;
+    font-weight: 500;
+    color: #FFD9B0;
+}
+
+.container {
+    margin: auto;
+    padding: 25px;
     width: 1200px;
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 35px;
     justify-content: space-between;
 }
 
-.kategori-bmi, .kategori-tekanan{
+.kategori-bmi, .kategori-tekanan {
     flex: 1;
-    background-color: #FFFFFF;
-    border: 2px solid #D1E3F3;
-    border-radius: 20px;
-    padding: 20px;
+    background-color: rgba(255,240,220,0.06);
+    border: 2px solid #FFB060;
+    border-radius: 18px;
+    padding: 22px;
     min-width: 520px;
-    min-height: 220px;
-    text-align: left;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    box-shadow:
+        0 0 18px rgba(255, 150, 70, 0.25),
+        inset 0 0 12px rgba(255, 180, 120, 0.18);
 }
 
-footer{
+.judul-kategori {
     text-align: center;
-    padding: 10px;
-    color: #475569;
-    background: #F0F4F4;
-    font-family: Poppins;
-    font-weight: 400;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    margin-bottom: 15px;
+    color:#FFD089;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.kategori p{
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.bmi, .tekanan{
+    text-align: left;
+    width: 75%;
+}
+
+.nilai{
+    text-align: right;
+    width: 25%;
+}
+
+footer {
+    background: #3a0d00;
+    color: #FFEAD1;
+    padding: 20px;
+    margin-top: 40px;
+    text-align: center;
+    border-top: 2px solid #FFB060;
+
+    box-shadow: 0 0 15px rgba(255,140,50,0.3);
+}
+.made {
+    font-size: 16px;
 }

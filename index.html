@@ -4,94 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Pengukuran BMI Otomatis</title>
-    <link rel="stylesheet" href="style.css">
-</html>
 
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
+
+    <!--JavaScript-->
+    <script src="script.js" defer></script>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
 
   <header>
-    <h1 class="header">BODY MASS INDEX AUTOMATION (BIMA-X) </h1>
-    <p class="deskripsi"> Yuk cek kesehatan kamu pakai BIMA-X! Mau tau tinggi badan? Berat badan? Tekanan darah? Atau bahkan nilai BMI kamu? Ngga perlu repot, tinggal datang, berdiri, dan senyum manis, semua hasilnya bakal tampil di sini. </p>
+    <h1>BODY MASS INDEX AUTOMATION (BIMA-X)</h1>
+    <p class="deskripsi"> 
+        Yuk cek kesehatan kamu pakai BIMA-X! Mau tau tinggi badan? Berat badan? Tekanan darah? Atau bahkan nilai BMI kamu? Ngga perlu repot, tinggal datang, berdiri, dan senyum manis, semua hasilnya bakal tampil di sini.
+    </p>
   </header>
 
-
-  <body>
-      <div class="form-container">
+    <div class="form-container">
         <div class="form-box1">
-    <section>
-      <h2 class="data">DATA DIRI</h2>
-      <form id="bmi-form">
-        <label for="name">Nama Lengkap:</label>
-        <input type="text" id="name" name="name" placeholder="Siti Rahma Nadila" required><br><br>
+          <section>
+            <h2 class="data">DATA DIRI</h2>
+              <form id="bmi-form">
+                <p class="reading">
+                <label for="name">Nama Lengkap:</label>
+                <input type="text" id="name" name="name" placeholder="Masukan Nama Lengkap" required><br><br>
+                </p>
 
-        <label for="age">Usia (tahun):</label>
-        <input type="number" id="age" name="age" placeholder="19" required><br><br>
+                <p class="reading">
+                <label for="age">Usia (tahun):</label>
+                <input type="number" id="age" name="age" placeholder="Masukan Umur" required><br><br>
+                </p>
 
-        <label for="jenis-kelamin">Jenis Kelamin:</label>
-        <select id="jenis-kelamin" name="jenis-kelamin" required>
-          <option value="laki-laki">Laki-laki</option>
-          <option value="perempuan">Perempuan</option>
-        </select><br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="amama@gmail.com" required><br><br>
-        <input type="submit" value="Mulai Pengukuran BMI">
-      </form>
-    </section>
-    </div>
+                <p class="reading">
+                <label for="jenis-kelamin">Jenis Kelamin:</label>
+                <select id="jenis-kelamin" name="jenis-kelamin" required>
+                  <option value="Pilih">Pilih Jenis Kelamin</option>
+                  <option value="laki-laki">Laki-laki</option>
+                  <option value="perempuan">Perempuan</option>
+                </select><br><br>
+                </p>
 
-    <div class="form-box2">
-    <section>
-  <h2 class="data-pengukuran">DATA PENGUKURAN REAL-TIME</h2>
-  <div class="grid-sensor">
-    <div class="measurements">
-      <label for="berat-badan">Berat Badan (kg)</label>
-      <div class="measure-value" id="beratValue">--</div>
-    </div>
-    <div class="measurements">
-      <label for="tinggi-badan">Tinggi Badan (cm)</label>
-      <div class="measure-value" id="tinggiValue">--</div>
-    </div>
-    <div class="measurements">
-      <label for="tekanan-darah">Tekanan Darah (mmHg)</label>
-      <div class="measure-value" id="tekananValue">--</div>
-    </div> 
-  </div>
-  <p class="note-sensor">Data sensor akan muncul otomatis saat perangkat terhubung.</p>
-    </section>
-    </div>
+                <p class="reading">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="contoh@gmail.com" required><br><br>
+                </p>
+
+                <p>
+                <button id="sendDataBtn" class="button">Mulai Pengukuran BMI</button>
+                </p>
+              </form>
+          </section>
+        </div>
+
+        <div class="form-box2">
+            <section>
+                <h2 class="data-pengukuran">DATA PENGUKURAN</h2>
+
+                <div class="grid-sensor">
+                    <div class="measurements">
+                        <label for="berat-badan">Berat Badan (kg)</label>
+                        <div class="measure-value" id="beratValue">--</div>
+                    </div>
+
+                    <div class="measurements">
+                        <label for="tinggi-badan">Tinggi Badan (cm)</label>
+                        <div class="measure-value" id="tinggiValue">--</div>
+                    </div>
+
+                    <div class="measurements">
+                        <label for="tekanan-darah">Tekanan Darah (mmHg)</label>
+                        <div class="measure-value" id="tekananValue">--</div>
+                    </div> 
+                </div>
+
+                <p class="note-sensor">Data sensor akan muncul otomatis saat perangkat terhubung.</p>
+            </section>
+        </div>
     </div>
 
 
     <section>
       <div class="hasil-bmi">
-      <h2>HASIL BMI</h2>
-      <p>Kategori:</p>
+        <h2>HASIL BMI</h2>
+        <p class="penjelasan">Kategori:</p>
+        <p id="bmiValue" class="measure-value">--</p>
+        <p id="bmiKategori" class="measure-value">--</p>
       </div>  
     </section>
 
 <div class="container">
+
     <section>
       <div class="kategori-bmi">
-        <h2>KATEGORI BMI</h2>
-      <p>Kurus < 18.5 </p>
-      <p>Normal 18.5 - 24.9</p>
-      <p>Overweight 25 - 29.9</p>
-      <p>Obesitas ≥ 30</p>
-      </div>
+            <h2 class="judul-kategori">KATEGORI BMI</h2>
+
+            <article class="kategori">
+                <p class="bmi">Kurus</p><p class="nilai"> <18.5 </p>
+            </article>
+
+            <article class="kategori">
+                <p class="bmi">Normal</p><p class="nilai">18.5 - 24.9</p>
+            </article>
+
+            <article class="kategori">
+                <p class="bmi">Overweight</p><p class="nilai">25 - 29.9</p>
+            </article>
+
+            <article class="kategori">
+                <p class="bmi">Obesitas</p><p class="nilai">≥ 30</p>
+            </article>
+        </div>
     </section>
+     
     <section>
       <div class="kategori-tekanan">
-        <h2>KATEGORI TEKANAN DARAH</h2>
-      <p>Rendah (Hipotensi)</p>
-      <p>Normal</p>
-      <p>Tinggi (Hipertensi)</p>
-      </div>
+            <h2 class="judul-kategori">KATEGORI TEKANAN DARAH</h2>
+
+            <article class="kategori">
+                <p class="tekanan">Rendah (Hipotensi)</p><p class="nilai"> < 90/60</p>
+            </article>
+
+            <article class="kategori">
+                <p class="tekanan">Normal</p><p class="nilai"> 90/60 - 120/80</p>
+            </article>
+
+            <article class="kategori">
+                <p class="tekanan">Tinggi (Hipertensi)</p><p class="nilai"> > 120/80</p>
+            </article>
+        </div>
     </section>
-    </div>
+
+</div>
+
+<footer>
+      <p class="made">Made with Love, Kelompok 12.</p>
+</footer>
+
 </body>
-
-    <footer>
-      <p>Made with Love, Kelompok 12.</p>
-    </footer>
 </html>
-
-      

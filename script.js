@@ -1,15 +1,11 @@
 var gateway = `ws://${window.location.hostname}/ws`;
 var websocket;
-// Init web socket when the page loads
+
 window.addEventListener('load', onload);
 
 function onload(event) {
     initWebSocket();
-    initButton();
-}
-
-function getReadings(){
-    websocket.send("getReadings");
+    initSendDataButton();
 }
 
 function initWebSocket() {
@@ -20,10 +16,8 @@ function initWebSocket() {
     websocket.onmessage = onMessage;
 }
 
-// When websocket is established, call the getReadings() function
 function onOpen(event) {
     console.log('Connection opened');
-    getReadings();
 }
 
 function onClose(event) {
@@ -31,29 +25,55 @@ function onClose(event) {
     setTimeout(initWebSocket, 2000);
 }
 
-// Function that receives the message from the ESP32 with the readings
 function onMessage(event) {
-    console.log(event.data);
-    var myObj = JSON.parse(event.data);
-    var keys = Object.keys(myObj);
+    console.log("Dari ESP32:", event.data);
 
-    for (var i = 0; i < keys.length; i++){
-        var key = keys[i];
-        document.getElementById(key).innerHTML = myObj[key];
+    try {
+        var obj = JSON.parse(event.data);
+
+        if (obj.beratValue !== undefined)
+            document.getElementById("beratValue").innerHTML = obj.beratValue;
+
+        if (obj.tinggiValue !== undefined)
+            document.getElementById("tinggiValue").innerHTML = obj.tinggiValue;
+
+        if (obj.tekananValue !== undefined)
+            document.getElementById("tekananValue").innerHTML = obj.tekananValue;
+
+        if (obj.bmiValue !== undefined)
+            document.getElementById("bmiValue").innerHTML = obj.bmiValue;
+
+        if (obj.bmiKategori !== undefined)
+            document.getElementById("bmiKategori").innerHTML = obj.bmiKategori;
+
+    } catch (e) {
+        console.log("Pesan bukan JSON");
     }
-    var state;
-    if (event.data == "1"){
-      state = "ON";
-    }
-    else{
-      state = "OFF";
-    }
-    document.getElementById('state').innerHTML = state;
 }
 
-function initButton() {
-    document.getElementById('button').addEventListener('click', toggle);
+function initSendDataButton() {
+    document.getElementById('sendDataBtn').addEventListener('click', function(e){
+        e.preventDefault();
+        sendData();
+    });
 }
-function toggle(){
-    websocket.send("toggle");
+
+function sendData() {
+    let data = {
+        nama: document.getElementById("name").value,
+        umur: document.getElementById("age").value,
+        kelamin: document.getElementById("jenis-kelamin").value,
+        email: document.getElementById("email").value
+    };
+
+    if (data.nama === "" || data.umur === "" ||
+        data.kelamin === "Pilih" || data.email === "") {
+
+        alert("Semua data harus diisi!");
+        return;
+    }
+
+    websocket.send(JSON.stringify(data));
+
+    alert("Data terkirim:\n" + JSON.stringify(data, null, 2));
 }
